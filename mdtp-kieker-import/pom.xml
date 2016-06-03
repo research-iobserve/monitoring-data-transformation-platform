@@ -1,0 +1,98 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.mdtp</groupId>
+	<artifactId>MDMKiekerImporter</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<repositories>
+
+		<repository>
+			<id>jboss</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
+		</repository>
+
+		<repository>
+			<id>nexus-NT</id>
+			<url>http://repository.novatec-gmbh.de/content/repositories/3rd_party_libs/</url>
+		</repository>
+
+		<repository>
+			<id>diagnoseIT-nexus</id>
+			<url>http://repository.novatec-gmbh.de/content/repositories/diagnoseIT/</url>
+		</repository>
+
+		<repository>
+			<id>diagnoseIT-snapshot-nexus</id>
+			<url>http://repository.novatec-gmbh.de/content/repositories/diagnoseIT-snapshots/</url>
+		</repository>
+
+	</repositories>
+
+	<dependencies>
+	
+	
+		<dependency>
+			<groupId>org.mdtp</groupId>
+			<artifactId>mdtp-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>rocks.cta</groupId>
+			<artifactId>cta.default.impl</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>diagnoseit.spike</groupId>
+			<artifactId>adapters.kieker</artifactId>
+			<version>0.2.0-SNAPSHOT</version>
+		</dependency>
+
+		
+		<dependency>
+			<groupId>net.kieker-monitoring</groupId>
+			<artifactId>kieker</artifactId>
+			<version>1.12</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.mdtp</groupId>
+			<artifactId>mdm.default.impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>iobserve-analysis</groupId>
+			<artifactId>org.iobserve.common</artifactId>
+			<version>1.0</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>net.kieker-monitoring</groupId>
+			<artifactId>kieker</artifactId>
+			<version>1.13-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>io.github.wessbas</groupId>
+			<artifactId>kiekerExtensions</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>
