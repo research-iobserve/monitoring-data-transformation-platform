@@ -11,6 +11,7 @@ import org.mdtp.terminal.commands.GenericMDMTransformationCommand;
 import org.mdtp.terminal.commands.MDMLoadCommand;
 import org.mdtp.terminal.commands.MDMStoreCommand;
 import org.mdtp.terminal.commands.StatusCommand;
+import org.mdtp.wessbas.WessbasModule;
 
 public class Main {
 
@@ -22,7 +23,8 @@ public class Main {
 			new StatusCommand(),
 			new MDMStoreCommand(),
 			new MDMLoadCommand(),
-			new GenericMDMTransformationCommand(new IObserveModule(), "iObserve")
+			new GenericMDMTransformationCommand(new IObserveModule(), "iObserve"),
+			new GenericMDMTransformationCommand(new WessbasModule(), "WESSBAS")
 			);
 	
 	public static void main(String[] args) {

@@ -2,16 +2,11 @@ package org.mdtp.iobserve.pipeline;
 
 import mdm.api.core.MonitoringDataSet;
 
-import org.eclipse.emf.common.util.URI;
 import org.iobserve.analysis.ObservationConfiguration;
-import org.iobserve.analysis.correspondence.CorrespondeceModelFactory;
-import org.iobserve.analysis.correspondence.ICorrespondence;
-import org.iobserve.analysis.filter.DeploymentEventTransformation;
+import org.iobserve.analysis.filter.TDeployment;
 import org.iobserve.analysis.filter.TEntryCallSequence;
 import org.iobserve.analysis.filter.TEntryEventSequence;
-import org.iobserve.analysis.filter.UndeploymentEventTransformation;
-import org.iobserve.analysis.modelprovider.PcmModelSaver;
-import org.iobserve.analysis.modelprovider.UsageModelProvider;
+import org.iobserve.analysis.filter.TUndeployment;
 
 import teetime.framework.AnalysisConfiguration;
 import teetime.framework.pipe.IPipeFactory;
@@ -34,10 +29,6 @@ public class PipelineConfiguration extends AnalysisConfiguration{
 	
 	//private MDMEventProducerStage producerStage;
 	
-	private final String correspondenceModelPath;
-	private final String inputPCMRepoPath;
-	private final String inputPCMUsageModelPath;
-	private final String outputPCMUsageModelPath;
 	private final MonitoringDataSet sourceMDM;
 	
 	
@@ -45,18 +36,10 @@ public class PipelineConfiguration extends AnalysisConfiguration{
 	/**
 	 * Constructor. Takes the confiugration of the input data as arguments.
 	 * 
-	 * @param correspondenceModelPath file path to the correspondence model file
-	 * @param inputPCMRepoPath file path to the input PCM repository model file
-	 * @param inputPCMUsageModelPath file path to the input PCM usage model file
-	 * @param outputPCMUsageModelPath file path to the output PCM usage model file
 	 * @param mdm
 	 */
-	public PipelineConfiguration(String correspondenceModelPath, String inputPCMRepoPath, String inputPCMUsageModelPath, String outputPCMUsageModelPath, MonitoringDataSet mdm) {
+	public PipelineConfiguration(MonitoringDataSet mdm) {
 		super();
-		this.correspondenceModelPath = correspondenceModelPath;
-		this.inputPCMRepoPath = inputPCMRepoPath;
-		this.inputPCMUsageModelPath = inputPCMUsageModelPath;
-		this.outputPCMUsageModelPath = outputPCMUsageModelPath;
 		this.sourceMDM = mdm;
 		configure();
 	}
@@ -75,23 +58,18 @@ public class PipelineConfiguration extends AnalysisConfiguration{
 		DeploymentEventBackTranslationStage deploymentTranslation = new DeploymentEventBackTranslationStage();
 		EntryCallTranslationStage entryCallTranslation = new EntryCallTranslationStage();
 		
-		final ICorrespondence correspondenceModel = this.getCorrespondenceModel();
-
 		// create filter
 
-		final DeploymentEventTransformation deployment = new DeploymentEventTransformation(
-				correspondenceModel);
-		final UndeploymentEventTransformation undeployment = new UndeploymentEventTransformation(
-				correspondenceModel);
+		final TDeployment deployment = new TDeployment();
+		final TUndeployment undeployment = new TUndeployment();
 
 		final TEntryCallSequence tEntryCallSequence = new TEntryCallSequence();
 
 		// get the usage model provider and reset it
-		final UsageModelProvider usageModelProvider = this.getUsageModelProvider();
-		usageModelProvider.resetUsageModel();
+	//	final UsageModelProvider usageModelProvider = this.getUsageModelProvider();
+	//	usageModelProvider.resetUsageModel();
 
-		final TEntryEventSequence tEntryEventSequence = new TEntryEventSequence(
-				correspondenceModel, usageModelProvider, this.getPcmModelSaver());
+		final TEntryEventSequence tEntryEventSequence = new TEntryEventSequence();
 		
 		final IPipeFactory factory = this.pipeFactoryRegistry.getPipeFactory(
 				ThreadCommunication.INTRA, PipeOrdering.ARBITRARY, false);
@@ -109,37 +87,4 @@ public class PipelineConfiguration extends AnalysisConfiguration{
 		addThreadableStage(producerStage);
 	}
 	
-
-	/**
-	 * Get the correspondence model
-	 * @return instance of {@link ICorrespondence}
-	 */
-	private ICorrespondence getCorrespondenceModel() {
-		final ICorrespondence model = CorrespondeceModelFactory.INSTANCE
-				.createCorrespondenceModel(correspondenceModelPath,
-						CorrespondeceModelFactory.INSTANCE.DEFAULT_OPERATION_SIGNATURE_MAPPER_2);
-		return model;
-	}
-
-	/**
-	 * Get the Model provider for the usage model
-	 * @return instance of usage model provider
-	 */
-	private UsageModelProvider getUsageModelProvider() {
-		final URI repositoryModelURI = URI.createFileURI(inputPCMRepoPath);
-		final URI inputUsageModelURI = URI.createFileURI(inputPCMUsageModelPath);
-		final UsageModelProvider provider = new UsageModelProvider(inputUsageModelURI, repositoryModelURI);
-
-		return provider;
-	}
-
-	/**
-	 * get the helper class to save PCM models
-	 * @return instance of that class
-	 */
-	private PcmModelSaver getPcmModelSaver() {
-		final URI outputUsageModelURI = URI.createFileURI(outputPCMUsageModelPath);
-		return new PcmModelSaver(outputUsageModelURI);
-	}
-
 }

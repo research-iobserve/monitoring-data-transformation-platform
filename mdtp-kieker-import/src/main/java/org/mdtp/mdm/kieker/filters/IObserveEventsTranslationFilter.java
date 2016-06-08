@@ -127,6 +127,7 @@ public final class IObserveEventsTranslationFilter extends AbstractFilterPlugin 
 		resultEvent.setContext(inEvent.getContext());
 		resultEvent.setDeploymentID(inEvent.getDeploymentId());
 		resultEvent.setTimestamp(inEvent.getTimestamp());
+		resultEvent.setService(inEvent.getSerivce());
 		return resultEvent;
 	}
 

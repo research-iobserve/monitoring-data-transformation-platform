@@ -12,5 +12,6 @@ import mdm.api.core.TimedEvent;
 public interface EJBDeploymentEvent extends TimedEvent {
 	Optional<String> getDeploymentID();
 	Optional<String> getContext();
+	Optional<String> getService();
 
 }

@@ -7,9 +7,48 @@
 
 
 	<repositories>
+	
+		<repository>
+			<id>jcenter</id>
+			<url>http://jcenter.bintray.com/</url>
+		</repository>
+		<repository>
+			<id>mvnrepository</id>
+			<url>http://repo1.maven.org/maven2</url>
+		</repository>
+		<repository>
+			<id>sonatype.oss.public</id>
+			<url>https://oss.sonatype.org/content/groups/public/</url>
+		</repository>
+
 		<repository>
 			<id>sonatype.oss.snapshots</id>
-			<url>https://oss.sonatype.org/content/groups/public/</url>
+			<url>https://oss.sonatype.org/content/repositories/snapshots/</url>
+		</repository>
+
+		<repository>
+			<id>sonatype.oss.releases</id>
+			<url>https://oss.sonatype.org/content/repositories/releases/</url>
+		</repository>
+
+		<repository>
+			<id>jitpack</id>
+			<url>https://jitpack.io</url>
+		</repository>
+
+		<repository>
+			<id>mvnrepo1</id>
+			<url>http://mvnrepository.com/artifact/org.eclipselabs/cdo.p2</url>
+		</repository>
+
+		<repository>
+			<id>mvnrepo2</id>
+			<url>http://mvnrepository.com/artifact/org.eclipselabs/cdo</url>
+		</repository>
+
+		<repository>
+			<id>mvnrepo3</id>
+			<url>http://mvnrepository.com/artifact/org.eclipselabs/cdo-maven</url>
 		</repository>
 
 	</repositories>
@@ -19,31 +58,26 @@
 			<artifactId>mdtp-core</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+
 		<dependency>
-			<groupId>net.sourceforge.teetime</groupId>
-			<artifactId>teetime</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>net.sourceforge.teetime-stages</groupId>
-			<artifactId>teetime-stages</artifactId>
-			<version>1.1.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.iobserve</groupId>
-			<artifactId>common</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
-		<dependency>
-			<groupId>org.iobserve</groupId>
+			<groupId>iobserve-analysis</groupId>
 			<artifactId>analysis</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>1.0</version>
 		</dependency>
+
+		<dependency>
+			<groupId>iobserve-analysis</groupId>
+			<artifactId>common</artifactId>
+			<version>1.0</version>
+		</dependency>
+
+
 		<dependency>
 			<groupId>org.slf4j</groupId>
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
 		</dependency>
+
 	</dependencies>
 	<build>
 		<plugins>

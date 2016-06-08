@@ -26,6 +26,7 @@
 			<id>diagnoseIT-snapshot-nexus</id>
 			<url>http://repository.novatec-gmbh.de/content/repositories/diagnoseIT-snapshots/</url>
 		</repository>
+		
 
 	</repositories>
 
@@ -63,9 +64,16 @@
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 
+<!-- 		<dependency> -->
+<!-- 			<groupId>iobserve-analysis</groupId> -->
+<!-- 			<artifactId>org.iobserve.common</artifactId> -->
+<!-- 			<version>1.0</version> -->
+<!-- 		</dependency> -->
+
+
 		<dependency>
 			<groupId>iobserve-analysis</groupId>
-			<artifactId>org.iobserve.common</artifactId>
+			<artifactId>common</artifactId>
 			<version>1.0</version>
 		</dependency>
 		

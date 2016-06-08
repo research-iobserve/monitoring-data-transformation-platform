@@ -48,7 +48,6 @@ public class EntryCallTranslationStage extends AbstractConsumerStage<SessionAwar
 					output.send(
 							//TODO: correct class name and method signature
 							new EntryCallEvent(
-									0,
 									rootInvocation.getTimestamp(),
 									rootInvocation.getExitTime(), 
 									rootInvocation.getSignature(),

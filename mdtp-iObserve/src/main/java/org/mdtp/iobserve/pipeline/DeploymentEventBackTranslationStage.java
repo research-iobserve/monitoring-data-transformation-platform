@@ -4,8 +4,6 @@ import mdm.api.core.Event;
 import mdm.api.deployment.EJBDeploymentEvent;
 import mdm.api.deployment.ServletDeploymentEvent;
 
-import org.iobserve.analysis.filter.DeploymentEventTransformation;
-import org.iobserve.analysis.filter.UndeploymentEventTransformation;
 import org.iobserve.common.record.IDeploymentRecord;
 import org.iobserve.common.record.IUndeploymentRecord;
 
@@ -72,12 +70,14 @@ public class DeploymentEventBackTranslationStage extends AbstractConsumerStage<E
 			deploymentOutputPort.send(
 			 new org.iobserve.common.record.EJBDeployedEvent(
 					input.getTimestamp(),
+					input.getService().orElse(null),
 					input.getContext().orElse(null),
 					input.getDeploymentID().orElse(null)));
 		} else if (input instanceof mdm.api.deployment.UndeployedEvent) {
 			undeploymentOutputPort.send(
 			 new org.iobserve.common.record.EJBUndeployedEvent(
 					input.getTimestamp(),
+					input.getService().orElse(null),
 					input.getContext().orElse(null),
 					input.getDeploymentID().orElse(null)));			
 		} else {

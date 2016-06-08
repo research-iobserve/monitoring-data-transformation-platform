@@ -14,6 +14,7 @@ public abstract class AbstractEJBDeploymentEvent extends AbstractTimedEvent impl
 	
 	private String context;
 	private String deploymentID;
+	private String service;
 	
 	public Optional<String> getContext() {
 		return Optional.ofNullable(context);
@@ -27,6 +28,15 @@ public abstract class AbstractEJBDeploymentEvent extends AbstractTimedEvent impl
 	public void setDeploymentID(String deploymentID) {
 		this.deploymentID = deploymentID;
 	}
+	public Optional<String> getService() {
+		return Optional.ofNullable(service);
+	}
+	
+	public void setService(String service) {
+		this.service = service;
+	}
+	
+	
 	
 	
 
