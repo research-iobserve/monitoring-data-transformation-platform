@@ -6,7 +6,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 
 	<repositories>
-
 		<repository>
 			<id>jboss</id>
 			<url>http://repository.jboss.org/nexus/content/groups/public-jboss</url>
@@ -26,8 +25,6 @@
 			<id>diagnoseIT-snapshot-nexus</id>
 			<url>http://repository.novatec-gmbh.de/content/repositories/diagnoseIT-snapshots/</url>
 		</repository>
-		
-
 	</repositories>
 
 	<dependencies>

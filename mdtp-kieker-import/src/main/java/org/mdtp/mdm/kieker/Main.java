@@ -54,7 +54,7 @@ public class Main {
 	private static final String OUTPUT_FILE = "MonitoringDataModel.mdm";
 	
 	//static final String path = "C:\\Users\\JKU\\Desktop\\thesis\\measurement data\\wessbas-withservletinfo";
-	static final String path = "C:\\Users\\JKU\\Desktop\\thesis\\measurement data\\cocome\\data";
+	static final String path = "C:\\Users\\JKU\\Desktop\\thesis\\local_measurement";
 	//static final String path = "C:\\Users\\JKU\\Desktop\\thesis\\measurement data\\cocome\\shortened";
 	//static final String path = "C:\\Users\\JKU\\Desktop\\thesis\\measurement data\\cocome\\new\\data";
 	//static final String path =  "C:\\Users\\JKU\\Desktop\\thesis\\measurement data\\wessbass-specJ\\specj_18min_4min_rampup_rampdown_800_user_25p_50b_25m";

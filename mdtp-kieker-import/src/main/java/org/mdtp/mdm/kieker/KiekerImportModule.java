@@ -39,6 +39,14 @@ public class KiekerImportModule implements ImportModule{
 	public List<? extends ConfigurationProperty<?>> getConfiguration() {
 		return allProperties;
 	}
+	
+	
+
+	public FileConfigurationProperty getInDirProperty() {
+		return inDir;
+	}
+
+
 
 	@Override
 	public void validateConfiguration(ErrorBuffer errors) {

@@ -54,6 +54,8 @@ public class MDMLoadCommand extends AbstractConfiguringCommand{
 				}
 			} catch (Exception e) {
 				terminal.printfln("ERROR: %s", e.getMessage());
+			} finally {
+				deserializer.close();
 			}
 		
 		}

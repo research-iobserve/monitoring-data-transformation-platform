@@ -13,12 +13,7 @@ import org.mdtp.core.ConfigurationProperty;
  * @author Jonas Kunz, advisors: Robert Heinrich, Christoph heger
  *
  */
-public class FileConfigurationProperty implements ConfigurationProperty<String> {
-
-	private String filePath;
-	
-	private String name;
-	private final String description;
+public class FileConfigurationProperty extends DefaultConfigurationProperty<String> {
 	
 	/**
 	 * Constructor. Takes the name and the description for this property as argumetns.
@@ -26,26 +21,10 @@ public class FileConfigurationProperty implements ConfigurationProperty<String> 
 	 * @param description a human-readable description of what this configuration property stands for
 	 */
 	public FileConfigurationProperty(String name, String description) {
-		this.name = name;
-		this.description = description;
+		super(name,description,String.class);
 	}
 	
 	
-	public String getDescription() {
-		return description;
-	}
-
-	public Class<String> getValueType() {
-		return String.class;
-	}
-
-	public Optional<String> getValue() {
-		return Optional.ofNullable(filePath);
-	}
-
-	public void setValue(String value) {
-		filePath = value;
-	}
 	
 	/**
 	 * @return true, if the value of this property has the correct syntax of a file path
@@ -55,6 +34,7 @@ public class FileConfigurationProperty implements ConfigurationProperty<String> 
 	}
 
 	private boolean checkPath() {
+		String filePath = getValue().orElse(null);
 		if(filePath == null){
 			return false;
 		}
@@ -71,14 +51,11 @@ public class FileConfigurationProperty implements ConfigurationProperty<String> 
 	 * @return the file this property's value points to, if it is a correct path
 	 */
 	public Optional<File> getFile(){
+		String filePath = getValue().orElse(null);
 		if(!checkPath()){
 			return Optional.empty();
 		}
 		return Optional.of(new File(filePath));
-	}
-
-	public String getName() {
-		return name;
 	}
 	
 }
