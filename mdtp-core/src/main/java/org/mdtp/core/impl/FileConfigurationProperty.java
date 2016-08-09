@@ -5,8 +5,6 @@ import java.nio.file.InvalidPathException;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import org.mdtp.core.ConfigurationProperty;
-
 /**
  * 
  * Configuration property for specifying a single file. Uses a string value to reference the file path.

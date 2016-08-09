@@ -31,12 +31,12 @@ public class MDMEventSwitchStage extends AbstractConsumerStage<Event>{
 	}
 
 
-	protected OutputPort<SessionAwareEvent> getSessionAwareEventsOutputPort() {
+	public OutputPort<SessionAwareEvent> getSessionAwareEventsOutputPort() {
 		return sessionAwareEventsOutputPort;
 	}
 
 
-	protected OutputPort<Event> getOtherEventsOutputPort() {
+	public OutputPort<Event> getOtherEventsOutputPort() {
 		return otherEventsOutputPort;
 	}
 	

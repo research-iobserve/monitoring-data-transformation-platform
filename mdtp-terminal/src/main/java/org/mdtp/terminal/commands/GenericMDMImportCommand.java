@@ -8,6 +8,13 @@ import org.mdtp.terminal.Terminal;
 
 import java.util.List;
 
+/**
+ * 
+ * Command for executing an arbitary MDM import module.
+ * 
+ * @author Jonas Kunz
+ *
+ */
 public class GenericMDMImportCommand extends AbstractConfiguringCommand{
 
 	private ImportModule importer;

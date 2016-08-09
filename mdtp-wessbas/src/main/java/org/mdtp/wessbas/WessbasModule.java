@@ -1,15 +1,11 @@
 package org.mdtp.wessbas;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
 import mdm.api.core.MonitoringDataSet;
-import mdm.dflt.impl.serialization.KryoMDMDeserializer;
-import mdm.dflt.impl.serialization.MDMDeserializer;
 import net.sf.markov4jmeter.behaviormodelextractor.BehaviorModelExtractor;
 import net.sf.markov4jmeter.m4jdslmodelgenerator.M4jdslModelGenerator;
 
@@ -21,6 +17,13 @@ import org.mdtp.core.impl.FileConfigurationProperty;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * Module for automatically executing WESSBAS.
+ * 
+ * @author Jonas Kunz
+ *
+ */
 public class WessbasModule implements TransformationModule {
 
 	private static final Logger LOG = LoggerFactory.getLogger(WessbasModule.class);
@@ -30,7 +33,7 @@ public class WessbasModule implements TransformationModule {
 
 	private FileConfigurationProperty workloadFile = new FileConfigurationProperty("workload", "The file specifying the workload intensity for geenraitng the DSL instnace");
 	
-	private FileConfigurationProperty outputDslFile = new FileConfigurationProperty("output", "The output file which wil lstore the WESSBAS DSL instance.");
+	private FileConfigurationProperty outputDslFile = new FileConfigurationProperty("output", "The output file which will store the WESSBAS DSL instance.");
 	
 	private List<ConfigurationProperty<String>> allConfigs = Arrays.asList(
 			tempDirectory,
@@ -134,33 +137,6 @@ public class WessbasModule implements TransformationModule {
 
 	}
 	
-	public static void main(String[] args) {
-		WessbasModule mod = new WessbasModule();
-		mod.tempDirectory.setValue("temp");
-		mod.outputDslFile.setValue("myDsl.xmi");
-		mod.workloadFile.setValue("workloadIntensity.properties");
-		
-		MonitoringDataSet mdm = readMdmFile("specJ.mdm");
-		
-		mod.execute(mdm);
-		
-	}
 	
-	private static MonitoringDataSet readMdmFile(String path) {
-		File file = new File(path);
-		MDMDeserializer deserializer = new KryoMDMDeserializer();
-		
-		try {
-			
-			deserializer.setSource(new FileInputStream(file));			
-			MonitoringDataSet mdm;
-			mdm = (MonitoringDataSet) deserializer.readNext();
-			deserializer.close();
-			
-			return mdm;
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		}
-	}
 
 }

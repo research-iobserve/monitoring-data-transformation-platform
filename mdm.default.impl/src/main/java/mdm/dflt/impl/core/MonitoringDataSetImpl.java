@@ -66,4 +66,8 @@ public class MonitoringDataSetImpl implements MonitoringDataSet {
 	public void removeRootEvent(AbstractEvent event) {
 		rootEvents.remove(event);
 	}
+
+	public void clear() {
+		rootEvents.clear();
+	}
 }

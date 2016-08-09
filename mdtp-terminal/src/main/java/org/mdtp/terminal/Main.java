@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.mdtp.iobserve.IObserveModule;
+import org.mdtp.mdm.inspectit.RestInspectITModule;
 import org.mdtp.mdm.kieker.KiekerImportModule;
 import org.mdtp.terminal.commands.GenericMDMImportCommand;
 import org.mdtp.terminal.commands.GenericMDMTransformationCommand;
@@ -20,6 +21,7 @@ public class Main {
 	 */
 	private static List<Command> commands = Arrays.asList(
 			new GenericMDMImportCommand(new KiekerImportModule(), "Kieker"),
+			new GenericMDMImportCommand(new RestInspectITModule(), "inspectIT-rest"),
 			new StatusCommand(),
 			new MDMStoreCommand(),
 			new MDMLoadCommand(),
@@ -29,7 +31,7 @@ public class Main {
 	
 	public static void main(String[] args) {
 		Terminal terminal = new Terminal();
-		terminal.printfln("Welcome to the Monitoring Data Transformation Platform Temrinal! Type \"help\" for help or \"q\" to exit.");
+		terminal.printfln("Welcome to the Monitoring Data Transformation Platform Terminal! Type \"help\" for help or \"q\" to exit.");
 		String inCmd;
 		terminal.printf("command: ");
 		while(!(inCmd = terminal.readString()).equalsIgnoreCase("q")) {

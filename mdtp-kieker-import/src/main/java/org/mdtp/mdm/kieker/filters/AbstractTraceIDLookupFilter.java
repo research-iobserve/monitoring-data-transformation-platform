@@ -3,6 +3,7 @@ package org.mdtp.mdm.kieker.filters;
 import java.util.HashMap;
 import java.util.Map;
 
+
 import mdm.api.core.MonitoringDataSet;
 import kieker.analysis.IProjectContext;
 import kieker.analysis.plugin.filter.AbstractFilterPlugin;
@@ -37,10 +38,12 @@ public abstract class AbstractTraceIDLookupFilter  extends AbstractFilterPlugin 
 		if(traceIDMap == null) {
 			synchronized(this) {
 				if(traceIDMap == null) {
-				System.out.println("Buildign trace id map...");
 					traceIDMap = new HashMap<>();
-					mdm.getTraces().forEach(t -> traceIDMap.put((Long)(t.getIdentifier().get()), t));
-					System.out.println("done.");
+					mdm.getTraces().forEach(t -> {
+						Object prev = traceIDMap.put((Long)(t.getIdentifier().get()), t);
+						if(prev != null) {
+						}
+					});
 				}				
 			}
 		}

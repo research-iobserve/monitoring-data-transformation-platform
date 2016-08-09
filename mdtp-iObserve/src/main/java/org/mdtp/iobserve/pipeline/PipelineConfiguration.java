@@ -17,7 +17,7 @@ import teetime.framework.pipe.PipeFactoryRegistry.ThreadCommunication;
 
 /**
  * 
- * Configures the pipeline to correctly conenct the individual stages.
+ * Configures the pipeline to correctly connect the individual stages.
  * This class is an adapted version of the {@link ObservationConfiguration} class.
  * 
  * @author Jonas Kunz, advisors: Robert Heinrich, Christoph heger

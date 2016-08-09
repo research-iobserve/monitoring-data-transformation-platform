@@ -29,6 +29,11 @@
 			<artifactId>MDMKiekerImporter</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
+		<dependency>
+			<groupId>org.mdtp</groupId>
+			<artifactId>mdtp-inspectit-import</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
 	</dependencies>
 	
 	<build>

@@ -8,6 +8,11 @@ import org.mdtp.terminal.Terminal;
 
 import java.util.List;
 
+/**
+ * Command ofr executing an arbitary MDM transformation module.
+ * @author Jonas Kunz
+ *
+ */
 public class GenericMDMTransformationCommand extends AbstractConfiguringCommand{
 
 	private TransformationModule transformer;

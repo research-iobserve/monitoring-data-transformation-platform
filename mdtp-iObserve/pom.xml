@@ -77,6 +77,16 @@
 			<artifactId>slf4j-api</artifactId>
 			<version>1.7.21</version>
 		</dependency>
+		
+		<!-- required for iObserve, the library can be found in the lib folder of the project -->
+		
+		<dependency>
+			<groupId>giusa-cmd</groupId>
+			<artifactId>giusa-cmd-artefact</artifactId>
+			<scope>system</scope>
+			<version>1.2</version>
+			<systemPath>C:\Users\JKU\Desktop\thesis\thesis_git\iobserve-analysis\org.iobserve.analysis\libs\giusa.tooling.cmd-1.2.jar</systemPath>
+		</dependency>
 
 	</dependencies>
 	<build>

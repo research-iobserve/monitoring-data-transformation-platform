@@ -1,0 +1,135 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>org.mdtp</groupId>
+	<artifactId>mdtp-inspectit-import</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+
+	<repositories>
+		<repository>
+			<id>nexus-NT</id>
+			<name>nexus-NT</name>
+			<url>http://repository.novatec-gmbh.de/content/repositories/3rd_party_libs/</url>
+		</repository>
+	</repositories>
+
+	<dependencies>
+
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.21</version>
+		</dependency>
+
+
+		<!-- <dependency> -->
+		<!-- <groupId>org.springframework</groupId> -->
+		<!-- <artifactId>spring-web</artifactId> -->
+		<!-- <version>4.2.6.RELEASE</version> -->
+		<!-- </dependency> -->
+
+		<dependency>
+			<groupId>org.mdtp</groupId>
+			<artifactId>mdtp-core</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+			<groupId>org.mdtp</groupId>
+			<artifactId>mdm.default.impl</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.httpcomponents</groupId>
+			<artifactId>httpclient</artifactId>
+			<version>4.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.13</version>
+		</dependency>
+		<!-- <dependency> -->
+		<!-- <groupId>com.fasterxml.jackson.core</groupId> -->
+		<!-- <artifactId>jackson-databind</artifactId> -->
+		<!-- <version>2.7.4</version> -->
+		<!-- </dependency> -->
+		
+		<dependency>
+			<groupId>inspectit.root</groupId>
+			<artifactId>inspectit-shared-all</artifactId>
+			<version>unspecified</version>
+		</dependency>
+		<dependency>
+			<groupId>inspectit.root</groupId>
+			<artifactId>inspectit-shared-cs</artifactId>
+			<version>unspecified</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>info.novatec.spring-core</artifactId>
+			<version>3.2.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>info.novatec.spring-beans</artifactId>
+			<version>3.2.16</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>info.novatec.spring-context</artifactId>
+			<version>3.2.16</version>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>info.novatec.spring-web</artifactId>
+			<version>3.2.16</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>info.novatec.spring-expression</artifactId>
+			<version>3.2.16</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>com.esotericsoftware.kryo</groupId>
+			<artifactId>kryo</artifactId>
+			<version>2.24.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.esotericsoftware.kryonet</groupId>
+			<artifactId>info.novatec.kryonet</artifactId>
+			<version>2.21</version>
+		</dependency>
+		<dependency>
+			<groupId>de.javakaffee</groupId>
+			<artifactId>info.novatec.kryo-serializers</artifactId>
+			<version>0.23</version>
+		</dependency>
+		
+
+		<!-- compile 'org.springframework:org.springframework.core:3.1.0.RELEASE' -->
+		<!-- compile 'org.springframework:org.springframework.beans:3.1.0.RELEASE' -->
+		<!-- compile 'org.springframework:org.springframework.context:3.1.0.RELEASE' -->
+		<!-- compile 'org.springframework:org.springframework.web:3.1.0.RELEASE' -->
+		<!-- compile 'org.springframework:org.springframework.asm:3.1.0.RELEASE' -->
+		<!-- compile 'org.springframework:org.springframework.expression:3.1.0.RELEASE' -->
+		<!-- compile 'org.springframework:org.springframework.aop:3.1.0.RELEASE' -->
+
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.3</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

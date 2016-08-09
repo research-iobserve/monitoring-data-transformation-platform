@@ -1,11 +1,15 @@
 package org.mdtp.iobserve;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 import mdm.api.core.MonitoringDataSet;
 
+import org.iobserve.analysis.AnalysisMain;
+import org.iobserve.analysis.AnalysisMainParameterBean;
 import org.mdtp.core.ConfigurationProperty;
 import org.mdtp.core.ErrorBuffer;
 import org.mdtp.core.TransformationModule;
@@ -27,19 +31,19 @@ import teetime.framework.AnalysisConfiguration;
 public class IObserveModule implements TransformationModule{
 
 	/**
-	 * Configuration property for the input repository model.
+	 * Configuration property for the input model.
 	 */
-	private FileConfigurationProperty pcmModelsDir = new PCMRepositoryModelProperty("inPcmDir", "Directory with all required PCM Models");
+	private FileConfigurationProperty modelsDir = new PCMRepositoryModelProperty("modelsDir", "Directory with all required Models");
 		
 
 	/**
-	 * Configuration property for the input correspondence model.
+	 * Configuration property for the logging output of iObserve.
 	 */
-	private FileConfigurationProperty correspondenceModel = new FileConfigurationProperty("correspondences", "The Correspondence model.");
+	private FileConfigurationProperty loggingDir = new FileConfigurationProperty("loggingDir", "The directory to write the logs to.");
 	
 	private List<FileConfigurationProperty> allProperties = Arrays.asList(
-			pcmModelsDir,
-			correspondenceModel);
+			modelsDir,
+			loggingDir);
 	
 	
 	@Override
@@ -50,28 +54,13 @@ public class IObserveModule implements TransformationModule{
 	@Override
 	public void validateConfiguration(ErrorBuffer errors) {
 		
-		if(!correspondenceModel.isPathValid() || !correspondenceModel.getFile().get().exists()) {
-			errors.addError("The path \"" + correspondenceModel.getValue().orElse("") + "\" does not point to a valid "
-					+ "correspondence model, as the file does not exist.");
+		if(!modelsDir.isPathValid() || !modelsDir.getFile().get().exists()) {
+			errors.addError("The path \"" + modelsDir.getValue().orElse("") + "\" does not point to a valid directory");
 		}
-		//TODO: check models dir
-		/*
-
-		if(!inputPcmUsage.isModelLoadable()) {
-			errors.addError("The path \"" + inputPcmUsage.getValue().orElse("") + "\" does not point to a loadable PCM Usage model");
+		//TODO: maybe add mechanisms to check if all required models are there?
+		if(!loggingDir.isPathValid() || !loggingDir.getFile().get().exists()) {
+			errors.addError("The path \"" + loggingDir.getValue().orElse("") + "\" does not point to a valid directory");
 		}
-
-		if(!inputPcmRepo.isModelLoadable()) {
-			errors.addError("The path \"" + inputPcmRepo.getValue().orElse("") + "\" does not point to a loadable PCM Repository model");
-		}
-		
-
-		if(!outputPcmUsage.isPathValid()) {
-			errors.addError("The path given for the output usage model \"" + outputPcmUsage.getValue().orElse("") + "\" is not a correct file path for a usage model.");
-		} else if ( outputPcmUsage.getFile().get().exists()) {
-			errors.addWarning("The given output usage model \"" + outputPcmUsage.getValue().orElse("") + "\" already exists and will be overwritten");
-		}
-		*/
 	}
 	
 	
@@ -79,16 +68,19 @@ public class IObserveModule implements TransformationModule{
 	@Override
 	public void execute(MonitoringDataSet monitoringData) {
 		
-		//delete the output file if it already exists
-		/*File outputFile = outputPcmUsage.getFile().get();
-		if(outputFile.exists()) {
-			outputFile.delete();
-		}*/
+		AnalysisMainParameterBean iObserveConfig = new AnalysisMainParameterBean();
+		iObserveConfig.setDirLogging(loggingDir.getValue().get());
+		iObserveConfig.setDirPcmModels(this.modelsDir.getValue().get());
+		//ugly workaround required as the method is not public yet...
+		try {
+			Method init = AnalysisMain.class.getDeclaredMethod("init", AnalysisMainParameterBean.class);
+			init.setAccessible(true);
+			init.invoke(AnalysisMain.getInstance(), iObserveConfig);
+			
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			throw new RuntimeException(e);
+		}
 		
-		//conf.setDirMonitoringData("");
-		//conf.setDirPcmModels(pcmModelsDir.getValue().get());
-		
-		//configure the iobserve pipeline with the configured input values
 		PipelineConfiguration config = new PipelineConfiguration(monitoringData);
 		
 		//execute the analysis

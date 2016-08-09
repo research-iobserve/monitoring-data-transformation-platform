@@ -13,6 +13,11 @@ import org.mdtp.core.ErrorBuffer;
 import org.mdtp.core.impl.FileConfigurationProperty;
 import org.mdtp.terminal.Terminal;
 
+/**
+ * Stores the loaded MDM instance on the hard disk.
+ * @author Jonas Kunz
+ *
+ */
 public class MDMStoreCommand extends AbstractConfiguringCommand{
 
 	@Override

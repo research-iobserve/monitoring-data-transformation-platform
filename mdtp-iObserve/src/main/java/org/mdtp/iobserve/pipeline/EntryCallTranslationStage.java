@@ -45,13 +45,26 @@ public class EntryCallTranslationStage extends AbstractConsumerStage<SessionAwar
 			
 			if(host.isPresent()) {
 				if(rootInvocation != null) {
+					
+					String returnType = rootInvocation.getReturnType().get();
+					String pckg = rootInvocation.getPackageName().get();
+					String clazz = rootInvocation.getClassName().get();
+					String meth = rootInvocation.getMethodName().get();
+					List<String> params = rootInvocation.getParameterTypes().get();
+					String paramsString ="";
+					for(int i=0; i<params.size(); i++) {
+						if(i!=0) {
+							paramsString+=", ";
+						}
+						paramsString+=params.get(i);
+					}
 					output.send(
 							//TODO: correct class name and method signature
 							new EntryCallEvent(
 									rootInvocation.getTimestamp(),
-									rootInvocation.getExitTime(), 
-									rootInvocation.getSignature(),
-									rootInvocation.getClassName().get(),
+									rootInvocation.getTimestamp() + rootInvocation.getResponseTime(), 
+									returnType+" "+meth+"("+paramsString+")",
+									pckg+"."+clazz,
 									event.getSessionID().get(),
 									host.get()));
 				} else {
@@ -86,7 +99,7 @@ public class EntryCallTranslationStage extends AbstractConsumerStage<SessionAwar
 		return (MethodInvocation) currentRoot;
 	}
 
-	protected OutputPort<EntryCallEvent> getOutputPort() {
+	public OutputPort<EntryCallEvent> getOutputPort() {
 		return output;
 	}
 	

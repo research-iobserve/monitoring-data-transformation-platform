@@ -14,6 +14,11 @@ import org.mdtp.core.ErrorBuffer;
 import org.mdtp.core.impl.FileConfigurationProperty;
 import org.mdtp.terminal.Terminal;
 
+/**
+ * Command for loading an pre-imported MDM instance from the hard disk.
+ * @author Jonas Kunz
+ *
+ */
 public class MDMLoadCommand extends AbstractConfiguringCommand{
 
 	@Override

@@ -25,10 +25,21 @@ import rocks.cta.api.core.callables.HTTPMethod;
 import rocks.cta.api.core.callables.MethodInvocation;
 import rocks.cta.api.core.callables.NestingCallable;
 
+/**
+ * 
+ * Class for transfomring MDM events into a WESSBAS compatible session log.
+ * @author Jonas Kunz
+ *
+ */
 public class MDMToSessionsDatConverter {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(MDMToSessionsDatConverter.class);
 	
+	/**
+	 * #Converts the given set of events into a session log.
+	 * @param events the events to convert
+	 * @param out the output stream to write the session log to.
+	 */
 	public void convert(Stream<Event> events, OutputStream out) {
 		
 		Comparator<SessionAwareEvent> timingComparator 
@@ -73,7 +84,7 @@ public class MDMToSessionsDatConverter {
 				.append(";\"")
 				.append(rootInvocation.getMethodName().get()).append("\":")
 				.append(rootInvocation.getTimestamp()).append(":")
-				.append(rootInvocation.getExitTime());		
+				.append(rootInvocation.getTimestamp()+rootInvocation.getResponseTime());		
 				
 				//if available, write out the HTTP information
 				if (event instanceof HTTPRequestReceivedEvent) {
@@ -113,7 +124,7 @@ public class MDMToSessionsDatConverter {
 			String protocol = event.getProtocol().orElse("HTTP/1.1");
 			String encoding = event.getEncoding().orElse("<no-encoding>");
 			String method = event.getRequestMethod().orElse(HTTPMethod.GET).toString();
-			String queryString = "";
+			String queryString = "<no-query-string>";
 			if(event.getHTTPParameters().isPresent()) {
 				queryString = encodeQueryString(event.getHTTPParameters().get());
 			}
@@ -161,6 +172,9 @@ public class MDMToSessionsDatConverter {
 	
 	private String encodeQueryString(Map<String,String[]> params) {
 		try {
+			if(params.isEmpty()) {
+				return "<no-query-string>";
+			}
 			StringBuffer result = new StringBuffer();
 			for(String key : params.keySet()) {
 				String encodedKey = URLEncoder.encode(key, "UTF-8");

@@ -28,6 +28,9 @@ import mdm.dflt.impl.core.EventSubTraceImpl;
 import mdm.dflt.impl.core.MonitoringDataSetImpl;
 import mdm.dflt.impl.core.UnmonitoredEventImpl;
 import mdm.dflt.impl.http.HTTPRequestReceivedEventImpl;
+import rocks.cta.api.core.callables.Callable;
+import rocks.cta.api.core.callables.MethodInvocation;
+import rocks.cta.api.core.callables.TimedCallable;
 import rocks.cta.dflt.impl.core.SubTraceImpl;
 import rocks.cta.dflt.impl.core.TraceImpl;
 import rocks.cta.dflt.impl.core.callables.HTTPRequestProcessingImpl;
@@ -94,7 +97,10 @@ public final class MDMTraceCreationFilter extends AbstractFilterPlugin {
 		
 		if (object instanceof MessageTrace) {
 			MessageTrace messageTrace = (MessageTrace) object;
-			TraceImpl trace = transformer.transform(org.diagnoseit.spike.kieker.trace.impl.TraceImpl.createCallableTrace(messageTrace));
+			org.diagnoseit.spike.kieker.trace.impl.TraceImpl kiekerSPecificTrace = org.diagnoseit.spike.kieker.trace.impl.TraceImpl.createCallableTrace(messageTrace);
+			
+			
+			TraceImpl trace = transformer.transform(kiekerSPecificTrace);
 
 			//Traces get their Kieker Id as identifier fo further use
 			trace.setIdentifier(messageTrace.getTraceId());
@@ -108,6 +114,8 @@ public final class MDMTraceCreationFilter extends AbstractFilterPlugin {
 			// we assume it was an HTTP Request if it has a session-id
 			if (messageTrace.getSessionId() != null && !messageTrace.getSessionId().equals(TraceMetadata.NO_SESSION_ID)) {
 				
+				
+				
 				HTTPRequestReceivedEventImpl event = new HTTPRequestReceivedEventImpl();
 				event.setSessionID(messageTrace.getSessionId());
 				event.setTimestamp(messageTrace.getStartTimestamp());
@@ -115,7 +123,15 @@ public final class MDMTraceCreationFilter extends AbstractFilterPlugin {
 				
 				//wrap the subtrace root in a Http-Processing Callable
 				HTTPRequestProcessingImpl reqProcessing = new HTTPRequestProcessingImpl();
-				reqProcessing.addCallee(rootSubTrace.getRoot());
+				Callable oldRoot = rootSubTrace.getRoot();
+				Callable kiekerRoot = kiekerSPecificTrace.getRoot().getRoot();
+				
+				reqProcessing.setTimestamp(oldRoot.getTimestamp());
+				if(oldRoot instanceof TimedCallable) {
+					reqProcessing.setResponseTime(((TimedCallable) oldRoot).getResponseTime());
+				}
+				
+				reqProcessing.addCallee(oldRoot);
 				rootSubTrace.setRoot(reqProcessing);
 				
 			} else {

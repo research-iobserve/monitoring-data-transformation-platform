@@ -9,6 +9,12 @@ import org.mdtp.terminal.Terminal;
 
 import mdm.api.core.MonitoringDataSet;
 
+/**
+ * 
+ * Command for printing information about the currently laoded MDM.
+ * @author Jonas Kunz
+ *
+ */
 public class StatusCommand implements Command{
 
 	@Override

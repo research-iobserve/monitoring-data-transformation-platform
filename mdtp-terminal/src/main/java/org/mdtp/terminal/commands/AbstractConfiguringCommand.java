@@ -9,7 +9,15 @@ import org.mdtp.terminal.Command;
 import org.mdtp.terminal.SimpleErrorBuffer;
 import org.mdtp.terminal.Terminal;
 
+/**
+ * Base class for al ltypes of commands which configure some type of COnfigurable through the command line.
+ * When configuring, the user is asked to enter the properties one after another.
+ * 
+ * @author Jonas Kunz
+ *
+ */
 public abstract class AbstractConfiguringCommand implements Command{
+	
 	
 	protected boolean performConfiguration(Terminal terminal, List<ConfigurationProperty<String>> propertiesToConfigure, Consumer<ErrorBuffer> configurationValidator) {
 

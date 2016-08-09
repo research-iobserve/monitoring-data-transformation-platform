@@ -35,6 +35,7 @@ import kieker.analysis.plugin.annotation.Plugin;
 import kieker.analysis.plugin.filter.AbstractFilterPlugin;
 import kieker.common.configuration.Configuration;
 import kieker.tools.traceAnalysis.systemModel.MessageTrace;
+import mdm.api.core.TimedEvent;
 import mdm.dflt.impl.core.EventSubTraceImpl;
 import mdm.dflt.impl.core.MonitoringDataSetImpl;
 import mdm.dflt.impl.http.HTTPRequestReceivedEventImpl;
@@ -122,7 +123,7 @@ public final class WESSBASHttpInfoExtractionFilter extends AbstractTraceIDLookup
 				//we expect the trace to not be malformed, therefore unchecked casts
 				
 				EventSubTraceImpl root = (EventSubTraceImpl) trace.getRoot();
-
+				
 				LocationImpl loc = new LocationImpl();
 				loc.setHost(rec.getHost()+":"+rec.getPort());
 				
@@ -168,6 +169,9 @@ public final class WESSBASHttpInfoExtractionFilter extends AbstractTraceIDLookup
 	 * @return
 	 */
 	private Map<String, String[]> decodeParameters(String queryString) {
+		if(queryString.equals("<no-query-string>")) {
+			return new HashMap<>();
+		}
 		HashMap<String, List<String>> result = new HashMap<>();
 		try {
 			final String[] pairs = queryString.split("&");
